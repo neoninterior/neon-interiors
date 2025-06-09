@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Neon Interiors - Elegant Interior Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400&display=swap');
+
+    :root {
+      --color-primary: #111827;
+      --color-secondary: #6b7280;
+      --color-accent: #2563eb;
+      --color-bg: #ffffff;
+      --color-text: #374151;
+      --border-radius: 0.75rem;
+      --transition-speed: 0.3s;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-secondary);
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-tap-highlight-color: transparent;
+      -moz-tap-highlight-color: transparent;
+      tap-highlight-color: transparent;
+    }
+
+    h1,h2,h3,h4 {
+      font-family: 'Poppins', sans-serif;
+      color: var(--color-primary);
+      letter-spacing: 0.03em;
+      margin-top:0;
+      margin-bottom:0.5rem;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: var(--color-secondary);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color var(--transition-speed);
+    }
+
+    a:hover, a:focus {
+      color: #1e40af;
+      outline: none;
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      box-sizing: border-box;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: var(--color-bg);
+      z-index: 100;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.15rem;
+      font-weight: 600;
+      font-size: 1rem;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--color-accent);
+      transition: width var(--transition-speed);
+      border-radius: 10px;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus::after {
+      width: 100%;
+    }
+
+    .cta-button {
+      background-color: var(--color-accent);
+      color: #fff;
+      font-weight: 600;
+      padding: 0.6rem 1.75rem;
+      border-radius: var(--border-radius);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      user-select: none;
+      transition: background-color var(--transition-speed), transform 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .cta-button:hover,
+    .cta-button:focus {
+      background-color: #1e40af;
+      outline: none;
+      transform: scale(1.05);
+    }
+
+    /* Logo and site title container */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--color-primary);
+      font-family: 'Poppins', sans-serif;
+      user-select: none;
+      text-decoration: none;
+    }
+
+    .logo-container img {
+      height: 40px;
+      width: auto;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 5rem 1.5rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero img.bg-image {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      filter: brightness(0.45);
+      transition: transform 0.4s ease;
+    }
+
+    .hero-content {
+      max-width: 720px;
+      color: white;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      user-select:none;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      font-weight: 500;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+      user-select:none;
+    }
+
+    .hero:hover img.bg-image {
+      transform: scale(1.05);
+    }
+
+    /* Sections */
+    section {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+      border-radius: var(--border-radius);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: #fafafa;
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 24px rgb(0 0 0 / 0.05);
+      padding: 2rem;
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+      user-select:none;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 32px rgb(0 0 0 / 0.12);
+    }
+
+    .card i {
+      font-size: 2.5rem;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+      pointer-events:none;
+      user-select:none;
+    }
+
+    /* Media grid for images and videos */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: 1.5rem;
+    }
+
+    .media-grid img, .media-grid video {
+      width: 100%;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      user-select:none;
+      max-height: 480px;
+      object-fit: cover;
+    }
+
+    .media-grid img:hover,
+    .media-grid video:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 26px rgb(0 0 0 / 0.15);
+    }
+
+    /* Video wrapper improvements */
+    .video-wrapper {
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 30px rgb(0 0 0 / 0.1);
+      overflow: hidden;
+      max-height: 480px;
+      background-color: #000;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .video-wrapper:hover,
+    .video-wrapper:focus-within {
+      box-shadow: 0 14px 48px rgb(0 0 0 / 0.18);
+      outline: none;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      display: block;
+      border-radius: var(--border-radius);
+      background-color: #000;
+    }
+
+    /* Contact Form */
+    form {
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #f9f9f9;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 6px 28px rgb(0 0 0 / 0.06);
+      user-select:none;
+    }
+
+    label {
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--color-primary);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      border: 1.5px solid #d1d5db;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color var(--transition-speed);
+      user-select:text;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--color-accent);
+      outline: none;
+      box-shadow: 0 0 5px var(--color-accent);
+    }
+
+    button[type="submit"] {
+      background-color: var(--color-accent);
+      color: white;
+      font-weight: 700;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: background-color var(--transition-speed);
+      user-select:none;
+      font-size: 1rem;
+    }
+
+    button[type="submit"]:hover,
+    button[type="submit"]:focus {
+      background-color: #1e40af;
+      outline: none;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.875rem;
+      color: var(--color-secondary);
+      border-top: 1px solid #e5e7eb;
+      user-select:none;
+    }
+
+    .social-icons {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+      color: var(--color-secondary);
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .social-icons a:hover, .social-icons a:focus {
+      color: var(--color-accent);
+      outline: none;
+    }
+
+    /* Category selector */
+    .category-select {
+      max-width: 320px;
+      margin: 0 auto 2rem auto;
+      display: block;
+      font-size: 1rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--border-radius);
+      border: 1.5px solid #d1d5db;
+      background-color: #fff;
+      color: var(--color-primary);
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: border-color var(--transition-speed);
+    }
+    .category-select:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 5px var(--color-accent);
+    }
+
+    @media(min-width: 768px) {
+      h1 {
+        font-size: 4.5rem;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+      }
+
+      nav {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav class="container" aria-label="Primary navigation">
+      <a href="#" class="logo-container" aria-label="Neon Interiors home">
+        <img src="assets/images/logo.png" alt="Neon Interiors logo" />
+        Neon Interiors
+      </a>
+      <div class="nav-links" role="menubar" aria-label="Main menu">
+        <a href="#services" role="menuitem" tabindex="0">Services</a>
+        <a href="#portfolio" role="menuitem" tabindex="0">Portfolio</a>
+        <a href="#videos" role="menuitem" tabindex="0">Videos</a>
+        <a href="#process" role="menuitem" tabindex="0">Our Process</a>
+        <a href="#contact" role="menuitem" tabindex="0">Contact</a>
+      </div>
+      <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" aria-label="Get in touch">Get in Touch</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" aria-label="Transforming your vision into spaces">
+    <img 
+      src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1200&amp;q=80" 
+      alt="Interior design stylish living room with modern furniture" 
+      class="bg-image" 
+      loading="lazy"
+    />
+    <div class="hero-content">
+      <h1>Transform Vision<br>Into Spaces</h1>
+      <p>Elegant, timeless interiors tailored to your lifestyle and taste.</p>
+      <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" aria-label="Get in touch">Get in Touch</button>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="container" aria-labelledby="services-title" role="region">
+    <h2 id="services-title">Our Services</h2>
+    <p>We create beautiful and functional spaces tailored to your vision.</p>
+    <div class="cards-grid">
+      <div class="card" role="article" tabindex="0" aria-label="Interior Design">
+        <i class="fas fa-pencil-ruler" aria-hidden="true"></i>
+        <h3>Interior Design</h3>
+        <p>Elegant, timeless design for your residential or commercial spaces.</p>
+      </div>
+      <div class="card" role="article" tabindex="0" aria-label="Space Planning">
+        <i class="fas fa-drafting-compass" aria-hidden="true"></i>
+        <h3>Space Planning</h3>
+        <p>Optimizing your layout for flow, light, and utility.</p>
+      </div>
+      <div class="card" role="article" tabindex="0" aria-label="Renovations">
+        <i class="fas fa-paint-roller" aria-hidden="true"></i>
+        <h3>Renovations</h3>
+        <p>Breathe new life into old spaces with thoughtful remodels.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="container bg-gray-50" aria-labelledby="portfolio-title" role="region">
+    <h2 id="portfolio-title" class="text-primary">Our Portfolio</h2>
+    <p class="mb-8 text-center max-w-xl mx-auto">Select a category to view photos:</p>
+    <select id="categorySelect" class="category-select" aria-label="Select portfolio category" onchange="showCategory(this.value)">
+      <option value="livingroom">Living Room</option>
+      <option value="bedroom">Bedroom</option>
+      <option value="wadrobe">Wadrobe</option>
+      <option value="workstation">Workstation</option>
+      <option value="kitchen">Kitchen</option>
+    </select>
+
+    <div id="portfolioGallery" class="media-grid" role="list" aria-live="polite" aria-atomic="true" aria-relevant="additions removals">
+      <!-- Images will load here dynamically -->
+    </div>
+
+    <p class="mt-4 text-sm text-center max-w-xl mx-auto">
+  
+    </p>
+  </section>
+
+  <!-- Videos Section -->
+  <section id="videos" class="container" aria-labelledby="videos-title" role="region">
+    <h2 id="videos-title" class="text-primary">Our Videos</h2>
+    <p class="mb-8 text-center max-w-xl mx-auto">Highlights from our interior design projects.</p>
+    <div class="media-grid" role="list" aria-label="List of interior design walkthrough videos">
+      <div class="video-wrapper" role="listitem" tabindex="0" aria-label="Interior design walkthrough video 1">
+        <video controls preload="metadata">
+          <source src="assets/images/videos/video1.mp4" type="video/mp4" />
+          <source src="assets/images/videos/video1.webm" type="video/webm" />
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+      </div>
+      <div class="video-wrapper" role="listitem" tabindex="0" aria-label="Interior design walkthrough video 2">
+        <video controls preload="metadata">
+          <source src="assets/images/videos/video2.MP4" type="video/MP4" />
+          <source src="assets/images/videos/video2.webm" type="video/webm" />
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+      </div>
+    </div>
+    <p class="mt-4 text-sm text-center max-w-xl mx-auto"></p>
+  </section>
+
+  <!-- Process Section -->
+  <section id="process" class="container" aria-labelledby="process-title" role="region">
+    <h2 id="process-title">Our Process</h2>
+    <p>From concept to completion, we’re with you every step.</p>
+    <div class="cards-grid" role="list">
+      <div class="card" role="listitem" tabindex="0">
+        <h3>1. Consultation</h3>
+        <p>Understanding your style, goals, and needs.</p>
+      </div>
+      <div class="card" role="listitem" tabindex="0">
+        <h3>2. Design</h3>
+        <p>Crafting a vision with moodboards and layouts.</p>
+      </div>
+      <div class="card" role="listitem" tabindex="0">
+        <h3>3. Execution</h3>
+        <p>Working with skilled teams to bring it to life.</p>
+      </div>
+      <div class="card" role="listitem" tabindex="0">
+        <h3>4. Reveal</h3>
+        <p>Final touches and walkthrough of your new space.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container" aria-labelledby="contact-title" role="region">
+    <h2 id="contact-title">Get in Touch</h2>
+    <p>Contact us for personalized interior design consultation.</p>
+
+    <form onsubmit="event.preventDefault(); alert('Thank you for reaching out! We will get back to you soon.'); this.reset();" aria-label="Contact form" novalidate>
+      <label for="name">Name <span aria-hidden="true" style="color: red;">*</span></label>
+      <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true" autocomplete="name" />
+
+      <label for="email">Email <span aria-hidden="true" style="color: red;">*</span></label>
+      <input type="email" id="email" name="email" placeholder="Your Email" required aria-required="true" autocomplete="email" />
+
+      <label for="phone">Phone Number <span aria-hidden="true" style="color: red;">*</span></label>
+      <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" pattern="[+]?[0-9\s\-()]{7,15}" required aria-required="true" autocomplete="tel" 
+        title="Please enter a valid phone number, digits and optional +, -, () allowed." />
+
+      <label for="message">Message <span aria-hidden="true" style="color: red;">*</span></label>
+      <textarea id="message" name="message" rows="5" placeholder="Your message here..." required aria-required="true" autocomplete="off"></textarea>
+
+      <button type="submit" aria-label="Submit contact form">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Neon Interiors. All rights reserved.</p>
+    <div class="social-icons" role="list" aria-label="Social media links">
+      <p>Email: <a href="mailto:neoninteriorspune@gmail.com">neoninteriorspune@gmail.com</a></p>
+        <p>Phone: <a href="tel:+91 98503 89918">+91 98503 89918</a></p>
+       <a href="https://www.facebook.com/share/15gpcg6RqS/" role="listitem" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+      <a href="https://www.instagram.com/neoninteriorsbyshital?igsh=bnUzOHpIMTJhZjBj" role="listitem" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    const portfolioImages = {
+      livingroom: [
+        "assets/images/living room/photo (1).jpeg",
+        "assets/images/living room/photo (2).jpeg",
+        "assets/images/living room/photo (3).jpeg",
+        "assets/images/living room/photo (4).jpeg",
+        "assets/images/living room/photo (5).jpeg",
+        "assets/images/living room/photo (6).jpeg",
+        "assets/images/living room/photo (7).jpeg",
+        "assets/images/living room/photo (8).jpeg"
+      ],
+      bedroom: [
+        "assets/images/bed room/photo (1).jpeg",
+        "assets/images/bed room/photo (1).jpg",
+        "assets/images/bed room/photo (5).jpeg",
+        "assets/images/bed room/photo (6).jpeg",
+        "assets/images/bed room/photo (9).jpeg",
+        "assets/images/bed room/photo (11).jpeg",
+        "assets/images/bed room/photo (12).jpeg",
+        "assets/images/bed room/photo (13).jpeg",
+        "assets/images/bed room/photo (14).jpeg",
+        "assets/images/bed room/photo (15).jpeg",
+      ],
+      wadrobe: [
+        "assets/images/wadrobe/photo (1).jpeg",
+        "assets/images/wadrobe/photo (2).jpeg",
+        "assets/images/wadrobe/photo (3).jpeg",
+        "assets/images/wadrobe/photo (4).jpeg",
+        "assets/images/wadrobe/photo (5).jpeg",
+        "assets/images/wadrobe/photo (6).jpeg",
+        "assets/images/wadrobe/photo (7).jpeg",
+        "assets/images/wadrobe/photo (8).jpeg",
+      ],
+      workstation: [
+        "assets/images/work station/photo (1).jpeg",
+        "assets/images/work station/photo (2).jpeg",
+        "assets/images/work station/photo (3).jpeg",
+        "assets/images/work station/photo (4).jpeg",
+        "assets/images/work station/photo (5).jpeg",
+        "assets/images/work station/photo (6).jpeg",
+        "assets/images/work station/photo (7).jpeg",
+        "assets/images/work station/photo (8).jpeg",
+        "assets/images/work station/photo (9).jpeg",
+        "assets/images/work station/photo (10).jpeg",
+        "assets/images/work station/photo (11).jpeg",
+        "assets/images/work station/photo (12).jpeg",
+        "assets/images/work station/photo (13).jpeg",
+        "assets/images/work station/photo (14).jpeg",
+        "assets/images/work station/photo (15).jpeg",
+      ],
+      kitchen: [
+        "assets/images/kitchen/photo (1).jpeg",
+        "assets/images/kitchen/photo (2).jpeg",
+        "assets/images/kitchen/photo (3).jpeg",
+        "assets/images/kitchen/photo (4).jpeg",
+        "assets/images/kitchen/photo (5).jpeg",
+        "assets/images/kitchen/photo (6).jpeg",
+        "assets/images/kitchen/photo (7).jpeg",
+      ]
+    };
+
+    function showCategory(category) {
+      const gallery = document.getElementById('portfolioGallery');
+      gallery.innerHTML = ''; // clear previous images
+      if (!portfolioImages[category]) return;
+      portfolioImages[category].forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `${category} interior project`;
+        img.loading = 'lazy';
+        img.role = 'listitem';
+        img.tabIndex = 0;
+        gallery.appendChild(img);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const select = document.getElementById('categorySelect');
+      showCategory(select.value);
+    });
+  </script>
+
+</body>
+</html>
+
