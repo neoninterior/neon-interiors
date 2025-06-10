@@ -1242,6 +1242,13 @@
         navLinks.classList.toggle('active');
       });
 
+      // Close mobile menu when clicking a navigation link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+        });
+      });
+
       // Close mobile menu when clicking outside
       document.addEventListener('click', (e) => {
         if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
