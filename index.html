@@ -744,33 +744,36 @@
       color: var(--color-primary);
       cursor: pointer;
       padding: 0.5rem;
+      z-index: 1001;
     }
 
     @media (max-width: 768px) {
       .mobile-menu-btn {
         display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--color-primary);
+        cursor: pointer;
+        padding: 0.5rem;
         z-index: 1001;
-        position: relative;
       }
 
       .nav-links {
+        display: none;
         position: fixed;
         top: 0;
-        right: -100%;
+        left: 0;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         background: white;
         flex-direction: column;
-        padding: 6rem 2rem 2rem 2rem;
-        transition: transform 0.3s ease;
-        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        padding: 5rem 2rem 2rem;
         z-index: 1000;
-        transform: translateX(100%);
       }
 
       .nav-links.active {
-        right: 0;
-        transform: translateX(0);
+        display: flex;
       }
 
       .nav-links a {
@@ -785,42 +788,19 @@
         border-bottom: none;
       }
 
-      header {
-        position: fixed;
-        width: 100%;
-        background: white;
-      }
-
       .category-tabs {
-        flex-wrap: nowrap;
+        display: flex;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        padding-bottom: 1rem;
-        margin: 2rem 0;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        position: relative;
-      }
-
-      .category-tabs::-webkit-scrollbar {
-        display: none;
+        padding: 1rem 0;
+        margin: 0;
+        gap: 0.5rem;
       }
 
       .category-tab {
-        white-space: nowrap;
         flex: 0 0 auto;
-        padding: 0.75rem 1.25rem;
-        margin: 0 0.5rem;
-        background: white;
-        border: 1px solid #e5e7eb;
-        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
         font-size: 0.9rem;
-      }
-
-      .category-tab[aria-selected="true"] {
-        background: var(--color-accent);
-        color: white;
-        border-color: var(--color-accent);
       }
     }
 
@@ -1190,113 +1170,41 @@
       loadCategoryImages('livingroom');
 
       tabs.forEach(tab => {
-        tab.addEventListener('click', e => {
-          e.preventDefault();
-          
-          // Close mobile menu if it's open
-          const navLinks = document.querySelector('.nav-links');
+        tab.addEventListener('click', () => {
+          // Close mobile menu if open
           if (navLinks.classList.contains('active')) {
             navLinks.classList.remove('active');
+            document.body.style.overflow = '';
           }
 
-          tabs.forEach(t => {
-            t.setAttribute('aria-selected', 'false');
-            t.tabIndex = -1;
-          });
+          // Update tab states
+          tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
           tab.setAttribute('aria-selected', 'true');
-          tab.tabIndex = 0;
-          tab.focus();
 
+          // Load category images
           const category = tab.dataset.category;
           loadCategoryImages(category);
 
-          // Improved smooth scrolling for mobile devices
-          const galleryTop = gallery.getBoundingClientRect().top + window.pageYOffset;
-          const headerHeight = document.querySelector('header').offsetHeight;
-          window.scrollTo({
-            top: galleryTop - headerHeight - 20, // Account for header height plus small padding
-            behavior: 'smooth'
-          });
+          // Scroll to gallery
+          gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       });
 
-      // Create overlay element
-      const overlay = document.createElement('div');
-      overlay.className = 'nav-overlay';
-      document.body.appendChild(overlay);
-
-      // Update mobile menu behavior
+      // Mobile menu functionality
       const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
       const navLinks = document.querySelector('.nav-links');
       
-      function closeMobileMenu() {
-        navLinks.classList.remove('active');
-        document.body.style.overflow = '';
-        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-      }
-
-      function openMobileMenu() {
-        navLinks.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-      }
-
-      mobileMenuBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (navLinks.classList.contains('active')) {
-          closeMobileMenu();
-        } else {
-          openMobileMenu();
-        }
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
       });
 
-      // Close mobile menu when clicking a navigation link
+      // Close menu when clicking links
       document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.stopPropagation();
-          closeMobileMenu();
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          document.body.style.overflow = '';
         });
-      });
-
-      // Update tab click behavior
-      tabs.forEach(tab => {
-        tab.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
-          
-          // Close mobile menu if it's open
-          if (navLinks.classList.contains('active')) {
-            closeMobileMenu();
-          }
-
-          tabs.forEach(t => {
-            t.setAttribute('aria-selected', 'false');
-            t.tabIndex = -1;
-          });
-          tab.setAttribute('aria-selected', 'true');
-          tab.tabIndex = 0;
-          tab.focus();
-
-          const category = tab.dataset.category;
-          loadCategoryImages(category);
-
-          // Improved smooth scrolling for mobile devices
-          const galleryTop = gallery.getBoundingClientRect().top + window.pageYOffset;
-          const headerHeight = document.querySelector('header').offsetHeight;
-          const scrollPosition = galleryTop - headerHeight - 20;
-          
-          window.scrollTo({
-            top: scrollPosition,
-            behavior: 'smooth'
-          });
-        });
-      });
-
-      // Close menu on window resize
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
-          closeMobileMenu();
-        }
       });
 
       // Loading Spinner
