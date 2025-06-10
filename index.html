@@ -756,23 +756,26 @@
         color: var(--color-primary);
         cursor: pointer;
         padding: 0.5rem;
+        position: relative;
+        z-index: 1001;
       }
 
       .nav-links {
-        display: none;
         position: fixed;
         top: 0;
-        left: 0;
-        width: 100%;
+        right: -100%;
+        width: 80%;
         height: 100vh;
         background: white;
         flex-direction: column;
         padding: 5rem 2rem 2rem;
+        transition: right 0.3s ease;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
         z-index: 1000;
       }
 
       .nav-links.active {
-        display: flex;
+        right: 0;
       }
 
       .nav-links a {
@@ -794,12 +797,18 @@
         padding: 1rem 0;
         margin: 0;
         gap: 0.5rem;
+        scrollbar-width: none;
+      }
+
+      .category-tabs::-webkit-scrollbar {
+        display: none;
       }
 
       .category-tab {
         flex: 0 0 auto;
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
+        white-space: nowrap;
       }
     }
 
@@ -1168,40 +1177,81 @@
       // Load living room images by default
       loadCategoryImages('livingroom');
 
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-          // Close mobile menu if open
-          if (navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-          }
-
-          // Update tab states
-          tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
-          tab.setAttribute('aria-selected', 'true');
-
-          // Load category images
-          const category = tab.dataset.category;
-          loadCategoryImages(category);
-
-          // Scroll to gallery
-          gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      });
-
       // Mobile menu functionality
       const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
       const navLinks = document.querySelector('.nav-links');
       
-      mobileMenuBtn.addEventListener('click', function() {
+      function toggleMenu() {
         navLinks.classList.toggle('active');
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+      }
+
+      mobileMenuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+          toggleMenu();
+        }
       });
 
       // Close menu when clicking links
       document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', function() {
-          navLinks.classList.remove('active');
+        link.addEventListener('click', function(e) {
+          e.stopPropagation();
+          toggleMenu();
         });
       });
+
+      // Tab functionality
+      function handleTabClick(tab) {
+        // Close mobile menu if open
+        if (navLinks.classList.contains('active')) {
+          toggleMenu();
+        }
+
+        // Update tab states
+        tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+        tab.setAttribute('aria-selected', 'true');
+
+        // Load category images
+        const category = tab.dataset.category;
+        loadCategoryImages(category);
+
+        // Scroll to gallery
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const galleryTop = gallery.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: galleryTop - headerHeight - 20,
+          behavior: 'smooth'
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          handleTabClick(tab);
+        });
+      });
+
+      // Handle touch events for mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      navLinks.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      navLinks.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchEndX < touchStartX - 50) { // Swipe left
+          toggleMenu();
+        }
+      }, { passive: true });
 
       // Loading Spinner
       const spinner = document.querySelector('.loading-spinner');
