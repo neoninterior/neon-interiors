@@ -756,7 +756,6 @@
         color: var(--color-primary);
         cursor: pointer;
         padding: 0.5rem;
-        z-index: 1001;
       }
 
       .nav-links {
@@ -765,7 +764,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         background: white;
         flex-direction: column;
         padding: 5rem 2rem 2rem;
@@ -1170,11 +1169,10 @@
       loadCategoryImages('livingroom');
 
       tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
+        tab.addEventListener('click', function() {
           // Close mobile menu if open
           if (navLinks.classList.contains('active')) {
             navLinks.classList.remove('active');
-            document.body.style.overflow = '';
           }
 
           // Update tab states
@@ -1194,16 +1192,14 @@
       const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
       const navLinks = document.querySelector('.nav-links');
       
-      mobileMenuBtn.addEventListener('click', () => {
+      mobileMenuBtn.addEventListener('click', function() {
         navLinks.classList.toggle('active');
-        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
       });
 
       // Close menu when clicking links
       document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', function() {
           navLinks.classList.remove('active');
-          document.body.style.overflow = '';
         });
       });
 
