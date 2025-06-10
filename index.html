@@ -756,6 +756,38 @@
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       }
 
+      .mobile-menu-btn {
+        display: block;
+        position: relative;
+        z-index: 1002;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 5rem 2rem 2rem;
+        transition: right 0.3s ease;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        z-index: 1001;
+        overflow-y: auto;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 1.2rem;
+        padding: 1rem 0;
+        width: 100%;
+        text-align: left;
+      }
+
       section {
         padding-top: 6rem;
         margin-top: 4rem;
@@ -779,24 +811,6 @@
         gap: 0.5rem;
         scrollbar-width: none;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 80%;
-        height: 100vh;
-        background: white;
-        flex-direction: column;
-        padding: 5rem 2rem 2rem;
-        transition: right 0.3s ease;
-        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-        z-index: 1001;
-      }
-
-      .nav-links.active {
-        right: 0;
       }
 
       .category-tab {
@@ -1179,16 +1193,22 @@
       function toggleMenu() {
         navLinks.classList.toggle('active');
         document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+          '<i class="fas fa-times"></i>' : 
+          '<i class="fas fa-bars"></i>';
       }
 
       mobileMenuBtn.addEventListener('click', function(e) {
+        e.preventDefault();
         e.stopPropagation();
         toggleMenu();
       });
 
       // Close menu when clicking outside
       document.addEventListener('click', function(e) {
-        if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        if (navLinks.classList.contains('active') && 
+            !navLinks.contains(e.target) && 
+            !mobileMenuBtn.contains(e.target)) {
           toggleMenu();
         }
       });
@@ -1196,8 +1216,9 @@
       // Close menu when clicking links
       document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', function(e) {
-          e.stopPropagation();
-          toggleMenu();
+          if (navLinks.classList.contains('active')) {
+            toggleMenu();
+          }
         });
       });
 
