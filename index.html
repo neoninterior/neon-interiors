@@ -240,6 +240,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      min-height: 100vh;
     }
     .hero img.bg-image {
       position: absolute;
@@ -248,7 +249,7 @@
       width: 100%;
       height: 100%;
       z-index: -2;
-      filter: brightness(0.45);
+      filter: brightness(0.4) contrast(1.1) saturate(1.2);
       transition: transform 0.4s ease;
     }
 
@@ -257,12 +258,18 @@
       color: white;
       position: relative;
       z-index: 10;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .hero h1 {
       margin-bottom: 1.25rem;
       letter-spacing: 0.07em;
       text-shadow: 2px 2px 12px rgba(0,0,0,0.6);
       user-select:none;
+      font-size: 3.5rem;
     }
     .hero p {
       font-size: 1.25rem;
@@ -754,11 +761,6 @@
         background: white;
         z-index: 1000;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-      }
-
-      header.menu-open {
-        transform: translateY(-100%);
       }
 
       .mobile-menu-btn {
@@ -771,7 +773,7 @@
         position: fixed;
         top: 0;
         right: -100%;
-        width: 100%;
+        width: 80%;
         height: 100vh;
         background: white;
         flex-direction: column;
@@ -793,36 +795,13 @@
         text-align: left;
       }
 
-      section {
-        padding-top: 6rem;
-        margin-top: 4rem;
+      .hero h1 {
+        font-size: 2.5rem;
       }
 
-      #portfolio {
-        padding-top: 8rem;
-      }
-
-      #portfolioGallery {
-        margin-top: 1rem;
-      }
-
-      .category-tabs {
-        position: sticky;
-        top: 4rem;
-        background: white;
-        z-index: 999;
-        padding: 1rem 0;
-        margin: 0;
-        gap: 0.5rem;
-        scrollbar-width: none;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      }
-
-      .category-tab {
-        flex: 0 0 auto;
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-        white-space: nowrap;
+      .hero-content {
+        padding: 1.5rem;
+        margin: 0 1rem;
       }
     }
 
@@ -1193,11 +1172,9 @@
       // Mobile menu functionality
       const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
       const navLinks = document.querySelector('.nav-links');
-      const header = document.querySelector('header');
       
       function toggleMenu() {
         navLinks.classList.toggle('active');
-        header.classList.toggle('menu-open');
         document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
         mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
           '<i class="fas fa-times"></i>' : 
