@@ -4,6 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>Neon Interiors - Elegant Interior Design</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Transform your space with Neon Interiors. We specialize in elegant, timeless interior design for residential and commercial spaces in Pune." />
+  <meta name="keywords" content="interior design, home decor, space planning, renovations, Pune interior designers, modern interiors" />
+  <meta name="author" content="Neon Interiors" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="Neon Interiors - Elegant Interior Design" />
+  <meta property="og:description" content="Transform your space with Neon Interiors. We specialize in elegant, timeless interior design for residential and commercial spaces in Pune." />
+  <meta property="og:image" content="https://www.neoninteriors.com/assets/images/logo.png" />
+  <meta property="og:url" content="https://www.neoninteriors.com" />
+  <meta property="og:type" content="website" />
+  
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Neon Interiors - Elegant Interior Design" />
+  <meta name="twitter:description" content="Transform your space with Neon Interiors. We specialize in elegant, timeless interior design for residential and commercial spaces in Pune." />
+  <meta name="twitter:image" content="https://www.neoninteriors.com/assets/images/logo.png" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
@@ -389,23 +413,20 @@
     input[type="tel"],
     textarea {
       width: 100%;
-      background: transparent;
+      background: #fff;
       border: 1.8px solid #d1d5db;
       border-radius: var(--border-radius);
       font-family: inherit;
-      padding: 1.15rem 1rem 0.35rem;
+      padding: 1.15rem 1rem;
       font-size: 1rem;
       color: var(--color-primary);
       transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
-      user-select:text;
       box-sizing: border-box;
     }
     textarea {
       min-height: 160px;
       resize: vertical;
-      padding-top: 1.15rem;
-      padding-bottom: 0.75rem;
-      line-height: 1.4;
+      padding-top: 1.5rem;
     }
     @media(min-width:768px) {
       textarea {
@@ -432,25 +453,21 @@
       font-size: 0.75rem;
       color: var(--color-accent);
       font-weight: 700;
-      background: var(--color-bg);
+      background: #fff;
       padding: 0 0.5rem;
       left: 0.9rem;
-      user-select:none;
-      pointer-events:none;
     }
 
     label {
       position: absolute;
       left: 1rem;
-      top: 1.05rem;
+      top: 1.15rem;
       color: var(--color-secondary);
       font-weight: 600;
       font-family: 'Poppins', sans-serif;
       pointer-events: none;
       transition: all 0.25s ease;
-      user-select:none;
       background: transparent;
-      cursor: text;
     }
 
     label > span.required {
@@ -654,7 +671,179 @@
       white-space: nowrap !important;
       border: 0 !important;
     }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--color-primary);
+      color: white;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--color-accent);
+      transform: translateY(-3px);
+    }
+
+    .loading-spinner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+
+    .loading-spinner.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--color-accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--color-primary);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        transition: right 0.3s ease;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 1.2rem;
+        padding: 1rem 0;
+      }
+    }
+
+    .form-feedback {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .form-feedback.success {
+      color: #10B981;
+      display: block;
+    }
+
+    .form-feedback.error {
+      color: #EF4444;
+      display: block;
+    }
+
+    .submit-btn {
+      position: relative;
+    }
+
+    .submit-btn.loading {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    .submit-btn.loading::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #fff;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   </style>
+  
+  <!-- Schema.org markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "InteriorDesignBusiness",
+    "name": "Neon Interiors",
+    "image": "https://www.neoninteriors.com/assets/images/logo.png",
+    "description": "Transform your space with Neon Interiors. We specialize in elegant, timeless interior design for residential and commercial spaces in Pune.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pune",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "18.5204",
+      "longitude": "73.8567"
+    },
+    "url": "https://www.neoninteriors.com",
+    "telephone": "+91 98503 89918",
+    "email": "neoninteriorspune@gmail.com",
+    "priceRange": "₹₹",
+    "openingHours": "Mo-Sa 09:00-18:00",
+    "sameAs": [
+      "https://www.facebook.com/share/15gpcg6RqS/",
+      "https://www.instagram.com/neoninteriorsbyshital"
+    ]
+  }
+  </script>
 </head>
 <body id="top">
 
@@ -664,6 +853,9 @@
         <img src="assets/images/logo.png" alt="Neon Interiors logo" />
         Neon Interiors
       </a>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
       <div class="nav-links" role="menubar" aria-label="Main menu">
         <a href="#top" role="menuitem" tabindex="0" aria-label="Home" onclick="scrollToTop(event)">
           <i class="fas fa-home" aria-hidden="true"></i> Home
@@ -677,6 +869,14 @@
       <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" aria-label="Get in touch">Get in Touch</button>
     </nav>
   </header>
+
+  <div class="loading-spinner">
+    <div class="spinner"></div>
+  </div>
+
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <section class="hero" aria-label="Transforming your vision into spaces">
     <img 
@@ -753,7 +953,7 @@
 
   <section id="process" class="container" aria-labelledby="process-title" role="region">
     <h2 id="process-title">Our Process</h2>
-    <p>From concept to completion, we’re with you every step.</p>
+    <p>From concept to completion, we're with you every step.</p>
     <div class="cards-grid" role="list">
       <div class="card" role="listitem" tabindex="0">
         <h3>1. Consultation</h3>
@@ -782,27 +982,22 @@
       <input type="hidden" name="_subject" value="New Contact Form Submission from Neon Interiors" />
       <input type="hidden" name="_next" value="https://www.neoninteriors.com/thank-you.html" />
 
-  <div class="form-group">
-  <input
-    type="text"
-    id="name"
-    name="name"
-    required
-    autocomplete="name"
-    aria-required="true"
-    title="Maximum 50 words allowed"
-    pattern="(?:\S+\s*){1,50}"
-    oninput="this.setCustomValidity('');"
-    oninvalid="this.setCustomValidity('Please enter no more than 50 words.')"
-    placeholder=" "
-  />
-  <label for="name">Name<span class="required" aria-hidden="true">*</span></label>
-</div>
-
-
+      <div class="form-group">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          autocomplete="name"
+          aria-required="true"
+          maxlength="50"
+          style="padding-top: 1.5rem;"
+        />
+        <label for="name">Name<span class="required" aria-hidden="true">*</span></label>
+      </div>
 
       <div class="form-group">
-        <input type="email" id="email" name="email" placeholder="                       Your Email " required autocomplete="email" aria-required="true" />
+        <input type="email" id="email" name="email" required autocomplete="email" aria-required="true" style="padding-top: 1.5rem;" />
         <label for="email">Email<span class="required" aria-hidden="true">*</span></label>
       </div>
 
@@ -812,7 +1007,6 @@
           type="tel"
           id="phone"
           name="phone"
-          placeholder=" "
           pattern="[6-9][0-9]{9}"
           maxlength="10"
           required
@@ -820,12 +1014,21 @@
           aria-required="true"
           autocomplete="tel-national"
           title="Enter a valid 10-digit Indian mobile number starting with 6-9"
+          style="padding-top: 1.5rem;"
         />
         <label for="phone">Phone Number<span class="required" aria-hidden="true">*</span></label>
       </div>
 
       <div class="form-group">
-        <textarea id="message" name="message" rows="5" placeholder="                                   Your message here (1BHK,2BHK,3BHK) " required aria-required="true" style="line-height:1.4;"></textarea>
+        <textarea 
+          id="message" 
+          name="message" 
+          rows="5" 
+          required 
+          aria-required="true" 
+          style="padding-top: 2rem; min-height: 160px;"
+          placeholder="Example: I am interested in interior design for my 2BHK apartment in Pune. Please provide details about your services and pricing."
+        ></textarea>
         <label for="message">Message<span class="required" aria-hidden="true">*</span></label>
       </div>
 
@@ -849,164 +1052,277 @@
       window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
-    const portfolioImages = {
-      livingroom: [
-        "assets/images/living room/photo (1).jpeg",
-        "assets/images/living room/photo (2).jpeg",
-        "assets/images/living room/photo (3).jpeg",
-        "assets/images/living room/photo (4).jpeg",
-        "assets/images/living room/photo (5).jpeg",
-        "assets/images/living room/photo (6).jpeg",
-        "assets/images/living room/photo (7).jpeg",
-        "assets/images/living room/photo (8).jpeg"
-      ],
-      bedroom: [
-        "assets/images/bed room/photo (1).jpeg",
-        "assets/images/bed room/photo (1).jpg",
-        "assets/images/bed room/photo (5).jpeg",
-        "assets/images/bed room/photo (6).jpeg",
-        "assets/images/bed room/photo (9).jpeg",
-        "assets/images/bed room/photo (11).jpeg",
-        "assets/images/bed room/photo (12).jpeg",
-        "assets/images/bed room/photo (13).jpeg",
-        "assets/images/bed room/photo (14).jpeg",
-        "assets/images/bed room/photo (15).jpeg",
-      ],
-      wadrobe: [
-        "assets/images/wadrobe/photo (1).jpeg",
-        "assets/images/wadrobe/photo (2).jpeg",
-        "assets/images/wadrobe/photo (3).jpeg",
-        "assets/images/wadrobe/photo (4).jpeg",
-        "assets/images/wadrobe/photo (5).jpeg",
-        "assets/images/wadrobe/photo (6).jpeg",
-        "assets/images/wadrobe/photo (7).jpeg",
-        "assets/images/wadrobe/photo (8).jpeg",
-      ],
-      workstation: [
-        "assets/images/work station/photo (1).jpeg",
-        "assets/images/work station/photo (2).jpeg",
-        "assets/images/work station/photo (3).jpeg",
-        "assets/images/work station/photo (4).jpeg",
-        "assets/images/work station/photo (5).jpeg",
-        "assets/images/work station/photo (6).jpeg",
-        "assets/images/work station/photo (7).jpeg",
-        "assets/images/work station/photo (8).jpeg",
-        "assets/images/work station/photo (9).jpeg",
-        "assets/images/work station/photo (10).jpeg",
-        "assets/images/work station/photo (11).jpeg",
-        "assets/images/work station/photo (12).jpeg",
-        "assets/images/work station/photo (13).jpeg",
-        "assets/images/work station/photo (14).jpeg",
-        "assets/images/work station/photo (15).jpeg",
-      ],
-      kitchen: [
-        "assets/images/kitchen/photo (1).jpeg",
-        "assets/images/kitchen/photo (2).jpeg",
-        "assets/images/kitchen/photo (3).jpeg",
-        "assets/images/kitchen/photo (4).jpeg",
-        "assets/images/kitchen/photo (5).jpeg",
-        "assets/images/kitchen/photo (6).jpeg",
-        "assets/images/kitchen/photo (7).jpeg",
-      ]
-    };
+    document.addEventListener('DOMContentLoaded', () => {
+      const portfolioImages = {
+        livingroom: [
+          "assets/images/living room/photo (1).jpeg",
+          "assets/images/living room/photo (2).jpeg",
+          "assets/images/living room/photo (3).jpeg",
+          "assets/images/living room/photo (4).jpeg",
+          "assets/images/living room/photo (5).jpeg",
+          "assets/images/living room/photo (6).jpeg",
+          "assets/images/living room/photo (7).jpeg",
+          "assets/images/living room/photo (8).jpeg"
+        ],
+        bedroom: [
+          "assets/images/bed room/photo (1).jpeg",
+          "assets/images/bed room/photo (1).jpg",
+          "assets/images/bed room/photo (5).jpeg",
+          "assets/images/bed room/photo (6).jpeg",
+          "assets/images/bed room/photo (9).jpeg",
+          "assets/images/bed room/photo (11).jpeg",
+          "assets/images/bed room/photo (12).jpeg",
+          "assets/images/bed room/photo (13).jpeg",
+          "assets/images/bed room/photo (14).jpeg",
+          "assets/images/bed room/photo (15).jpeg",
+        ],
+        wadrobe: [
+          "assets/images/wadrobe/photo (1).jpeg",
+          "assets/images/wadrobe/photo (2).jpeg",
+          "assets/images/wadrobe/photo (3).jpeg",
+          "assets/images/wadrobe/photo (4).jpeg",
+          "assets/images/wadrobe/photo (5).jpeg",
+          "assets/images/wadrobe/photo (6).jpeg",
+          "assets/images/wadrobe/photo (7).jpeg",
+          "assets/images/wadrobe/photo (8).jpeg",
+        ],
+        workstation: [
+          "assets/images/work station/photo (1).jpeg",
+          "assets/images/work station/photo (2).jpeg",
+          "assets/images/work station/photo (3).jpeg",
+          "assets/images/work station/photo (4).jpeg",
+          "assets/images/work station/photo (5).jpeg",
+          "assets/images/work station/photo (6).jpeg",
+          "assets/images/work station/photo (7).jpeg",
+          "assets/images/work station/photo (8).jpeg",
+          "assets/images/work station/photo (9).jpeg",
+          "assets/images/work station/photo (10).jpeg",
+          "assets/images/work station/photo (11).jpeg",
+          "assets/images/work station/photo (12).jpeg",
+          "assets/images/work station/photo (13).jpeg",
+          "assets/images/work station/photo (14).jpeg",
+          "assets/images/work station/photo (15).jpeg",
+        ],
+        kitchen: [
+          "assets/images/kitchen/photo (1).jpeg",
+          "assets/images/kitchen/photo (2).jpeg",
+          "assets/images/kitchen/photo (3).jpeg",
+          "assets/images/kitchen/photo (4).jpeg",
+          "assets/images/kitchen/photo (5).jpeg",
+          "assets/images/kitchen/photo (6).jpeg",
+          "assets/images/kitchen/photo (7).jpeg",
+        ]
+      };
 
-    const tabs = document.querySelectorAll('.category-tab');
-    const gallery = document.getElementById('portfolioGallery');
+      const tabs = document.querySelectorAll('.category-tab');
+      const gallery = document.getElementById('portfolioGallery');
 
-    function loadCategoryImages(category) {
-      gallery.innerHTML = '';
-      if (!portfolioImages[category]) return;
-      portfolioImages[category].forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = category.replace(/^\w/, c => c.toUpperCase()) + ' interior project';
-        img.loading = 'lazy';
-        img.role = 'listitem';
-        img.tabIndex = 0;
-        gallery.appendChild(img);
-      });
-    }
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', e => {
-        e.preventDefault();
-        tabs.forEach(t => {
-          t.setAttribute('aria-selected', 'false');
-          t.tabIndex = -1;
+      function loadCategoryImages(category) {
+        gallery.innerHTML = '';
+        if (!portfolioImages[category]) return;
+        
+        portfolioImages[category].forEach(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = category.replace(/^\w/, c => c.toUpperCase()) + ' interior project';
+          img.loading = 'lazy';
+          img.role = 'listitem';
+          img.tabIndex = 0;
+          img.onerror = function() {
+            console.error('Failed to load image:', src);
+            this.style.display = 'none';
+          };
+          gallery.appendChild(img);
         });
-        tab.setAttribute('aria-selected', 'true');
-        tab.tabIndex = 0;
-        tab.focus();
+      }
 
-        const category = tab.dataset.category;
-        loadCategoryImages(category);
-      });
-      tab.addEventListener('keydown', e => {
-        let index = Array.from(tabs).indexOf(e.target);
-        if (e.key === 'ArrowRight') {
+      // Load living room images by default
+      loadCategoryImages('livingroom');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', e => {
           e.preventDefault();
-          let nextIndex = (index + 1) % tabs.length;
-          tabs[nextIndex].focus();
-        } else if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          let prevIndex = (index - 1 + tabs.length) % tabs.length;
-          tabs[prevIndex].focus();
-        }
+          tabs.forEach(t => {
+            t.setAttribute('aria-selected', 'false');
+            t.tabIndex = -1;
+          });
+          tab.setAttribute('aria-selected', 'true');
+          tab.tabIndex = 0;
+          tab.focus();
+
+          const category = tab.dataset.category;
+          loadCategoryImages(category);
+        });
       });
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-  const nameInput = document.getElementById('name');
-  nameInput.addEventListener('input', () => {
-    const words = nameInput.value.match(/\S+/g) || [];
-    if (words.length > 50) {
-      nameInput.value = words.slice(0, 50).join(' ');
-    }
-  });
-});
+      const nameInput = document.getElementById('name');
+      
+      function updateCharCount() {
+        const remaining = 50 - nameInput.value.length;
+        if (remaining <= 10) {
+          nameInput.setCustomValidity(`Maximum 50 characters allowed. ${remaining} characters remaining.`);
+        } else {
+          nameInput.setCustomValidity('');
+        }
+      }
 
+      nameInput.addEventListener('input', updateCharCount);
 
-    const form = document.getElementById('contactForm');
-    const phoneInput = document.getElementById('phone');
+      const form = document.getElementById('contactForm');
+      const phoneInput = document.getElementById('phone');
 
-    form.addEventListener('submit', (e) => {
-      let valid = true;
-      ['name-error', 'email-error', 'phone-error', 'message-error'].forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.textContent = '';
+      form.addEventListener('submit', (e) => {
+        let valid = true;
+        ['name-error', 'email-error', 'phone-error', 'message-error'].forEach(id => {
+          const el = document.getElementById(id);
+          if(el) el.textContent = '';
+        });
+
+        if (!form.name.value.trim()) {
+          valid = false;
+        }
+        if (!form.email.value.trim() || !form.email.checkValidity()) {
+          valid = false;
+        }
+        const phoneValue = phoneInput.value.trim();
+        const phonePattern = /^[6-9][0-9]{9}$/;
+        if (!phonePattern.test(phoneValue)) {
+          valid = false;
+        }
+        if (!form.message.value.trim()) {
+          valid = false;
+        }
+
+        if (!valid) {
+          e.preventDefault();
+          alert('Please fill in all fields correctly.');
+          return false;
+        }
+
+        let hiddenFullPhoneInput = form.querySelector('input[name="full_phone"]');
+        if (!hiddenFullPhoneInput) {
+          hiddenFullPhoneInput = document.createElement('input');
+          hiddenFullPhoneInput.type = 'hidden';
+          hiddenFullPhoneInput.name = 'full_phone';
+          form.appendChild(hiddenFullPhoneInput);
+        }
+        hiddenFullPhoneInput.value = '+91' + phoneValue;
       });
 
-      if (!form.name.value.trim()) {
-        valid = false;
-      }
-      if (!form.email.value.trim() || !form.email.checkValidity()) {
-        valid = false;
-      }
-      const phoneValue = phoneInput.value.trim();
-      const phonePattern = /^[6-9][0-9]{9}$/;
-      if (!phonePattern.test(phoneValue)) {
-        valid = false;
-      }
-      if (!form.message.value.trim()) {
-        valid = false;
-      }
+      // Loading Spinner
+      const spinner = document.querySelector('.loading-spinner');
+      window.addEventListener('load', () => {
+        spinner.classList.add('hidden');
+      });
 
-      if (!valid) {
+      // Back to Top Button
+      const backToTop = document.querySelector('.back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      });
+
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Mobile Menu
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+      
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+          navLinks.classList.remove('active');
+        }
+      });
+
+      // Form Validation and Feedback
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const messageInput = document.getElementById('message');
+
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        alert('Please fill in all fields correctly.');
-        return false;
-      }
+        
+        // Validate form
+        if (!form.checkValidity()) {
+          const feedback = document.createElement('div');
+          feedback.className = 'form-feedback error';
+          feedback.textContent = 'Please fill all required fields correctly.';
+          form.appendChild(feedback);
+          
+          // Remove feedback after 5 seconds
+          setTimeout(() => {
+            feedback.remove();
+          }, 5000);
+          return;
+        }
 
-      let hiddenFullPhoneInput = form.querySelector('input[name="full_phone"]');
-      if (!hiddenFullPhoneInput) {
-        hiddenFullPhoneInput = document.createElement('input');
-        hiddenFullPhoneInput.type = 'hidden';
-        hiddenFullPhoneInput.name = 'full_phone';
-        form.appendChild(hiddenFullPhoneInput);
-      }
-      hiddenFullPhoneInput.value = '+91' + phoneValue;
+        // Show loading state
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+
+        try {
+          const formData = new FormData(form);
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.ok) {
+            // Remove any existing feedback
+            const existingFeedback = form.querySelector('.form-feedback');
+            if (existingFeedback) {
+              existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'form-feedback success';
+            feedback.textContent = 'Message sent successfully! We will get back to you soon.';
+            form.appendChild(feedback);
+            form.reset();
+
+            // Remove feedback after 5 seconds
+            setTimeout(() => {
+              feedback.remove();
+            }, 5000);
+          } else {
+            throw new Error('Form submission failed');
+          }
+        } catch (error) {
+          // Remove any existing feedback
+          const existingFeedback = form.querySelector('.form-feedback');
+          if (existingFeedback) {
+            existingFeedback.remove();
+          }
+
+          const feedback = document.createElement('div');
+          feedback.className = 'form-feedback error';
+          feedback.textContent = 'Failed to send message. Please try again.';
+          form.appendChild(feedback);
+
+          // Remove feedback after 5 seconds
+          setTimeout(() => {
+            feedback.remove();
+          }, 5000);
+        } finally {
+          submitBtn.classList.remove('loading');
+          submitBtn.disabled = false;
+        }
+      });
     });
   </script>
 </body>
 </html>
-
