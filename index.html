@@ -863,7 +863,7 @@
         <a href="#services" role="menuitem" tabindex="0">Services</a>
         <a href="#portfolio" role="menuitem" tabindex="0">Portfolio</a>
         <a href="#videos" role="menuitem" tabindex="0">Videos</a>
-        <a href="#process" role="menuitem" tabindex="0">Our Process</a>
+        <a href="#process" role="menuitem" tabindex="0">Process</a>
         <a href="#contact" role="menuitem" tabindex="0">Contact</a>
       </div>
       <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" aria-label="Get in touch">Get in Touch</button>
@@ -915,7 +915,7 @@
   </section>
 
   <section id="portfolio" class="container bg-gray-50" aria-labelledby="portfolio-title" role="region">
-    <h2 id="portfolio-title" class="text-primary">Our Portfolio</h2>
+    <h2 id="portfolio-title" class="text-primary">Portfolio</h2>
     <p class="mb-12 text-center max-w-xl mx-auto" id="portfolioDescription">Select a category to view photos:</p>
 
     <div role="tablist" aria-label="Portfolio categories" class="category-tabs" id="categoryTabs">
@@ -931,7 +931,7 @@
   </section>
 
   <section id="videos" class="container" aria-labelledby="videos-title" role="region">
-    <h2 id="videos-title" class="text-primary">Our Videos</h2>
+    <h2 id="videos-title" class="text-primary">Videos</h2>
     <p class="mb-8 text-center max-w-xl mx-auto">Highlights from our interior design projects.</p>
     <div class="media-grid" role="list" aria-label="List of interior design walkthrough videos">
       <div class="video-wrapper" role="listitem" tabindex="0" aria-label="Interior design walkthrough video 1">
@@ -952,7 +952,7 @@
   </section>
 
   <section id="process" class="container" aria-labelledby="process-title" role="region">
-    <h2 id="process-title">Our Process</h2>
+    <h2 id="process-title">Process</h2>
     <p>From concept to completion, we're with you every step.</p>
     <div class="cards-grid" role="list">
       <div class="card" role="listitem" tabindex="0">
@@ -1152,6 +1152,13 @@
 
           const category = tab.dataset.category;
           loadCategoryImages(category);
+
+          // Add smooth scrolling for mobile devices
+          const galleryTop = gallery.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: galleryTop - 100, // Offset by 100px to account for header
+            behavior: 'smooth'
+          });
         });
       });
     });
