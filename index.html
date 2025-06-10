@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth" >
 <head>
   <meta charset="UTF-8" />
@@ -750,6 +750,7 @@
       .mobile-menu-btn {
         display: block;
         z-index: 1001;
+        position: relative;
       }
 
       .nav-links {
@@ -761,13 +762,15 @@
         background: white;
         flex-direction: column;
         padding: 6rem 2rem 2rem 2rem;
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease;
         box-shadow: -2px 0 10px rgba(0,0,0,0.1);
         z-index: 1000;
+        transform: translateX(100%);
       }
 
       .nav-links.active {
         right: 0;
+        transform: translateX(0);
       }
 
       .nav-links a {
@@ -775,24 +778,17 @@
         padding: 1rem 0;
         width: 100%;
         text-align: center;
+        border-bottom: 1px solid #eee;
       }
 
-      .nav-overlay {
-        display: none;
+      .nav-links a:last-child {
+        border-bottom: none;
+      }
+
+      header {
         position: fixed;
-        top: 0;
-        left: 0;
         width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .nav-overlay.active {
-        display: block;
-        opacity: 1;
+        background: white;
       }
 
       .category-tabs {
@@ -800,9 +796,10 @@
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         padding-bottom: 1rem;
-        margin-bottom: 2rem;
+        margin: 2rem 0;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        position: relative;
       }
 
       .category-tabs::-webkit-scrollbar {
@@ -812,6 +809,18 @@
       .category-tab {
         white-space: nowrap;
         flex: 0 0 auto;
+        padding: 0.75rem 1.25rem;
+        margin: 0 0.5rem;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .category-tab[aria-selected="true"] {
+        background: var(--color-accent);
+        color: white;
+        border-color: var(--color-accent);
       }
     }
 
@@ -1219,23 +1228,21 @@
       // Update mobile menu behavior
       const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
       const navLinks = document.querySelector('.nav-links');
-      const header = document.querySelector('header');
       
       function closeMobileMenu() {
         navLinks.classList.remove('active');
-        overlay.classList.remove('active');
         document.body.style.overflow = '';
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
       }
 
       function openMobileMenu() {
         navLinks.classList.add('active');
-        overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
-        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
       }
 
-      mobileMenuBtn.addEventListener('click', () => {
+      mobileMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (navLinks.classList.contains('active')) {
           closeMobileMenu();
         } else {
@@ -1243,18 +1250,19 @@
         }
       });
 
-      // Close mobile menu when clicking overlay
-      overlay.addEventListener('click', closeMobileMenu);
-
       // Close mobile menu when clicking a navigation link
       document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
+        link.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closeMobileMenu();
+        });
       });
 
       // Update tab click behavior
       tabs.forEach(tab => {
         tab.addEventListener('click', e => {
           e.preventDefault();
+          e.stopPropagation();
           
           // Close mobile menu if it's open
           if (navLinks.classList.contains('active')) {
@@ -1274,44 +1282,22 @@
 
           // Improved smooth scrolling for mobile devices
           const galleryTop = gallery.getBoundingClientRect().top + window.pageYOffset;
-          const headerHeight = header.offsetHeight;
+          const headerHeight = document.querySelector('header').offsetHeight;
           const scrollPosition = galleryTop - headerHeight - 20;
           
-          // Use requestAnimationFrame for smoother scrolling
-          requestAnimationFrame(() => {
-            window.scrollTo({
-              top: scrollPosition,
-              behavior: 'smooth'
-            });
+          window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
           });
         });
       });
 
-      // Handle touch events for mobile
-      let touchStartX = 0;
-      let touchEndX = 0;
-
-      navLinks.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, false);
-
-      navLinks.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      }, false);
-
-      function handleSwipe() {
-        if (touchEndX < touchStartX - 50) { // Swipe left
+      // Close menu on window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
           closeMobileMenu();
         }
-      }
-
-      // Prevent body scroll when menu is open
-      navLinks.addEventListener('touchmove', e => {
-        if (navLinks.classList.contains('active')) {
-          e.preventDefault();
-        }
-      }, { passive: false });
+      });
 
       // Loading Spinner
       const spinner = document.querySelector('.loading-spinner');
