@@ -918,15 +918,28 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .completion-steps {
-      position: relative;
+    .process-steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
       padding: 2rem 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .process-steps::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
     }
 
     .step {
       text-align: center;
       padding: 1rem;
       position: relative;
+      min-width: 200px;
+      flex: 1;
     }
 
     .round {
@@ -993,55 +1006,6 @@
       transform: translateY(-50%);
     }
 
-    /* Owl Carousel Custom Styles */
-    .owl-nav {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      transform: translateY(-50%);
-      display: flex;
-      justify-content: space-between;
-      pointer-events: none;
-    }
-
-    .owl-prev, .owl-next {
-      width: 40px;
-      height: 40px;
-      background: var(--color-accent) !important;
-      border-radius: 50% !important;
-      color: white !important;
-      font-size: 1.5rem !important;
-      display: flex !important;
-      align-items: center;
-      justify-content: center;
-      pointer-events: auto;
-      transition: all 0.3s ease;
-    }
-
-    .owl-prev:hover, .owl-next:hover {
-      background: var(--color-accent-hover) !important;
-      transform: scale(1.1);
-    }
-
-    .owl-dots {
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .owl-dot {
-      width: 10px;
-      height: 10px;
-      background: #e5e7eb !important;
-      border-radius: 50%;
-      margin: 0 5px;
-      transition: all 0.3s ease;
-    }
-
-    .owl-dot.active {
-      background: var(--color-accent) !important;
-      transform: scale(1.2);
-    }
-
     @media (max-width: 768px) {
       .process-title h2 {
         font-size: 2rem;
@@ -1058,6 +1022,10 @@
 
       .text {
         font-size: 0.9rem;
+      }
+
+      .step {
+        min-width: 150px;
       }
     }
   </style>
@@ -1192,6 +1160,7 @@
         <video controls preload="metadata" tabindex="0">
           <source src="assets/images/videos/video2.MP4" type="video/MP4" />
           <source src="assets/images/videos/video2.webm" type="video/webm" />
+           <source src="assets/images/videos/video3.webm" type="video/webm" />
           Sorry, your browser doesn't support embedded videos.
         </video>
       </div>
@@ -1203,7 +1172,7 @@
       <h2 id="process-title">Process</h2>
       <p>PROJECT COMPLETION IN <span style="color: var(--color-accent); font-weight: bold;">45 WORKING DAYS</span></p>
     </div>
-    <div class="completion-steps owl-carousel">
+    <div class="process-steps">
       <div class="step">
         <div class="round">
           <div class="icon">
@@ -1283,10 +1252,6 @@
         <div class="text">
           Project<br>Completion
         </div>
-        <div class="progress">
-          <div class="line"></div>
-          <div class="arrow"></div>
-        </div>
       </div>
     </div>
   </section>
@@ -1309,13 +1274,12 @@
           aria-required="true"
           maxlength="50"
           style="padding-top: 1.5rem;"
-          placeholder="Your Name"
         />
         <label for="name">Name<span class="required" aria-hidden="true">*</span></label>
       </div>
 
       <div class="form-group">
-        <input type="email" id="email" name="email" required autocomplete="email" aria-required="true" style="padding-top: 1.5rem;" placeholder="Your Email" />
+        <input type="email" id="email" name="email" required autocomplete="email" aria-required="true" style="padding-top: 1.5rem;" />
         <label for="email">Email<span class="required" aria-hidden="true">*</span></label>
       </div>
 
@@ -1380,7 +1344,8 @@
           "assets/images/living room/photo (5).jpeg",
           "assets/images/living room/photo (6).jpeg",
           "assets/images/living room/photo (7).jpeg",
-          "assets/images/living room/photo (8).jpeg"
+          "assets/images/living room/photo (8).jpeg",
+          "assets/images/living room/photo (9).jpeg",
         ],
         bedroom: [
           "assets/images/bed room/photo (1).jpeg",
@@ -1754,38 +1719,6 @@
         }
       });
     });
-
-    // Initialize Owl Carousel
-    $(document).ready(function(){
-      $('.completion-steps').owlCarousel({
-        loop: true,
-        margin: 20,
-        nav: true,
-        dots: true,
-        autoplay: true,
-        autoplayTimeout: 3000,
-        autoplayHoverPause: true,
-        responsive: {
-          0: {
-            items: 1
-          },
-          576: {
-            items: 2
-          },
-          768: {
-            items: 3
-          },
-          992: {
-            items: 4
-          },
-          1200: {
-            items: 6
-          }
-        }
-      });
-    });
   </script>
 </body>
 </html>
-
-
