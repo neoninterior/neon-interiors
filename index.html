@@ -30,6 +30,10 @@
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap');
 
@@ -899,6 +903,163 @@
       top: 50%;
       transform: translateY(-50%);
     }
+
+    /* Process Section Styles */
+    .process-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .process-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--color-accent), var(--color-accent-hover));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .completion-steps {
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .step {
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .round {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, var(--color-accent), var(--color-accent-hover));
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+    }
+
+    .round:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    .icon {
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    .text {
+      font-size: 1rem;
+      color: var(--color-primary);
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+      min-height: 3em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .progress {
+      position: relative;
+      height: 2px;
+      margin-top: 1rem;
+    }
+
+    .line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-hover));
+      transform: translateY(-50%);
+    }
+
+    .arrow {
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 0 6px 8px;
+      border-color: transparent transparent transparent var(--color-accent);
+      transform: translateY(-50%);
+    }
+
+    /* Owl Carousel Custom Styles */
+    .owl-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .owl-prev, .owl-next {
+      width: 40px;
+      height: 40px;
+      background: var(--color-accent) !important;
+      border-radius: 50% !important;
+      color: white !important;
+      font-size: 1.5rem !important;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto;
+      transition: all 0.3s ease;
+    }
+
+    .owl-prev:hover, .owl-next:hover {
+      background: var(--color-accent-hover) !important;
+      transform: scale(1.1);
+    }
+
+    .owl-dots {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .owl-dot {
+      width: 10px;
+      height: 10px;
+      background: #e5e7eb !important;
+      border-radius: 50%;
+      margin: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .owl-dot.active {
+      background: var(--color-accent) !important;
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 768px) {
+      .process-title h2 {
+        font-size: 2rem;
+      }
+
+      .round {
+        width: 80px;
+        height: 80px;
+      }
+
+      .icon {
+        font-size: 2rem;
+      }
+
+      .text {
+        font-size: 0.9rem;
+      }
+    }
   </style>
   
   <!-- Schema.org markup -->
@@ -1038,24 +1199,94 @@
   </section>
 
   <section id="process" class="container" aria-labelledby="process-title" role="region">
-    <h2 id="process-title">Process</h2>
-    <p>From concept to completion, we're with you every step.</p>
-    <div class="cards-grid" role="list">
-      <div class="card" role="listitem" tabindex="0">
-        <h3>1. Consultation</h3>
-        <p>Understanding your style, goals, and needs.</p>
+    <div class="process-title">
+      <h2 id="process-title">Process</h2>
+      <p>PROJECT COMPLETION IN <span style="color: var(--color-accent); font-weight: bold;">45 WORKING DAYS</span></p>
+    </div>
+    <div class="completion-steps owl-carousel">
+      <div class="step">
+        <div class="round">
+          <div class="icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+        </div>
+        <div class="text">
+          Contact Us
+        </div>
+        <div class="progress">
+          <div class="line"></div>
+          <div class="arrow"></div>
+        </div>
       </div>
-      <div class="card" role="listitem" tabindex="0">
-        <h3>2. Design</h3>
-        <p>Crafting a vision with moodboards and layouts.</p>
+      <div class="step">
+        <div class="round">
+          <div class="icon">
+            <i class="fas fa-clipboard-check"></i>
+          </div>
+        </div>
+        <div class="text">
+          Site Visit &<br>Cost Estimation
+        </div>
+        <div class="progress">
+          <div class="line"></div>
+          <div class="arrow"></div>
+        </div>
       </div>
-      <div class="card" role="listitem" tabindex="0">
-        <h3>3. Execution</h3>
-        <p>Working with skilled teams to bring it to life.</p>
+      <div class="step">
+        <div class="round">
+          <div class="icon">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+        </div>
+        <div class="text">
+          Advance<br>Payment
+        </div>
+        <div class="progress">
+          <div class="line"></div>
+          <div class="arrow"></div>
+        </div>
       </div>
-      <div class="card" role="listitem" tabindex="0">
-        <h3>4. Reveal</h3>
-        <p>Final touches and walkthrough of your new space.</p>
+      <div class="step">
+        <div class="round">
+          <div class="icon">
+            <i class="fas fa-cube"></i>
+          </div>
+        </div>
+        <div class="text">
+          3D Design &<br>Approval
+        </div>
+        <div class="progress">
+          <div class="line"></div>
+          <div class="arrow"></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="round">
+          <div class="icon">
+            <i class="fas fa-hammer"></i>
+          </div>
+        </div>
+        <div class="text">
+          Carpenter Work Start<br>& Regular Consultation
+        </div>
+        <div class="progress">
+          <div class="line"></div>
+          <div class="arrow"></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="round">
+          <div class="icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+        </div>
+        <div class="text">
+          Project<br>Completion
+        </div>
+        <div class="progress">
+          <div class="line"></div>
+          <div class="arrow"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1078,12 +1309,13 @@
           aria-required="true"
           maxlength="50"
           style="padding-top: 1.5rem;"
+          placeholder="Your Name"
         />
         <label for="name">Name<span class="required" aria-hidden="true">*</span></label>
       </div>
 
       <div class="form-group">
-        <input type="email" id="email" name="email" required autocomplete="email" aria-required="true" style="padding-top: 1.5rem;" />
+        <input type="email" id="email" name="email" required autocomplete="email" aria-required="true" style="padding-top: 1.5rem;" placeholder="Your Email" />
         <label for="email">Email<span class="required" aria-hidden="true">*</span></label>
       </div>
 
@@ -1522,7 +1754,38 @@
         }
       });
     });
+
+    // Initialize Owl Carousel
+    $(document).ready(function(){
+      $('.completion-steps').owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: true,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsive: {
+          0: {
+            items: 1
+          },
+          576: {
+            items: 2
+          },
+          768: {
+            items: 3
+          },
+          992: {
+            items: 4
+          },
+          1200: {
+            items: 6
+          }
+        }
+      });
+    });
   </script>
 </body>
 </html>
+
 
