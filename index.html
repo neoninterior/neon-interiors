@@ -984,6 +984,32 @@
       margin-top: 1rem;
     }
 
+    .progress.vertical {
+      height: 40px;
+      width: 2px;
+      margin: 1rem auto 0;
+    }
+
+    .progress.vertical .line {
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--color-accent), var(--color-accent-hover));
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .progress.vertical .arrow-down {
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px 6px 0 6px;
+      border-color: var(--color-accent) transparent transparent transparent;
+    }
+
     .line {
       position: absolute;
       top: 50%;
@@ -1004,6 +1030,26 @@
       border-width: 6px 0 6px 8px;
       border-color: transparent transparent transparent var(--color-accent);
       transform: translateY(-50%);
+    }
+
+    .end-mark {
+      position: absolute;
+      right: -2px;
+      top: -8px;
+      width: 2px;
+      height: 20px;
+      background: var(--color-accent);
+    }
+
+    .small-arrow {
+      position: absolute;
+      right: -2px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid var(--color-accent);
+      border-right: 2px solid var(--color-accent);
+      transform: translateY(-50%) rotate(45deg);
     }
 
     @media (max-width: 768px) {
@@ -1160,7 +1206,13 @@
         <video controls preload="metadata" tabindex="0">
           <source src="assets/images/videos/video2.MP4" type="video/MP4" />
           <source src="assets/images/videos/video2.webm" type="video/webm" />
-           <source src="assets/images/videos/video3.webm" type="video/webm" />
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+      </div>
+      <div class="video-wrapper" role="listitem" tabindex="0" aria-label="Interior design walkthrough video 3">
+        <video controls preload="metadata" tabindex="0">
+          <source src="assets/images/videos/video3.MP4" type="video/MP4" />
+          <source src="assets/images/videos/video3.webm" type="video/webm" />
           Sorry, your browser doesn't support embedded videos.
         </video>
       </div>
@@ -1251,6 +1303,10 @@
         </div>
         <div class="text">
           Project<br>Completion
+        </div>
+        <div class="progress">
+          <div class="line"></div>
+          <div class="end-mark"></div>
         </div>
       </div>
     </div>
@@ -1345,7 +1401,7 @@
           "assets/images/living room/photo (6).jpeg",
           "assets/images/living room/photo (7).jpeg",
           "assets/images/living room/photo (8).jpeg",
-          "assets/images/living room/photo (9).jpeg",
+          "assets/images/living room/photo(9).JPG",
         ],
         bedroom: [
           "assets/images/bed room/photo (1).jpeg",
