@@ -188,7 +188,8 @@
     }
 
     .cta-button {
-      background-color: var(--color-primary);
+      background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
+      background-size: 200% 200%;
       color: #fff;
       font-weight: 700;
       padding: 0.75rem 2.5rem;
@@ -197,15 +198,35 @@
       cursor: pointer;
       font-size: 1.1rem;
       user-select: none;
-      transition: background-color var(--transition-speed), transform 0.3s ease;
+      transition: all 0.3s ease;
       -webkit-tap-highlight-color: transparent;
+      animation: gradientMove 3s ease infinite;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      box-shadow: 
+        0 0 5px rgba(255, 0, 255, 0.5),
+        0 0 10px rgba(0, 255, 255, 0.5),
+        0 0 15px rgba(255, 0, 255, 0.3);
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .cta-button:hover,
     .cta-button:focus {
-      background-color: var(--color-accent-hover);
-      outline: none;
       transform: scale(1.05);
+      box-shadow: 
+        0 0 10px rgba(255, 0, 255, 0.7),
+        0 0 20px rgba(0, 255, 255, 0.7),
+        0 0 30px rgba(255, 0, 255, 0.5);
     }
 
     .logo-container {
@@ -214,11 +235,28 @@
       gap: 0.85rem;
       font-weight: 700;
       font-size: 1.5rem;
-      color: var(--color-primary);
       font-family: 'Poppins', sans-serif;
       user-select: none;
       text-decoration: none;
       cursor: default;
+      background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientMove 3s ease infinite;
+      text-shadow: 
+        0 0 5px rgba(255, 0, 255, 0.5),
+        0 0 10px rgba(0, 255, 255, 0.5),
+        0 0 15px rgba(255, 0, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .logo-container:hover {
+      text-shadow: 
+        0 0 10px rgba(255, 0, 255, 0.7),
+        0 0 20px rgba(0, 255, 255, 0.7),
+        0 0 30px rgba(255, 0, 255, 0.5);
     }
 
     .logo-container img {
@@ -1294,17 +1332,134 @@
       });
 
       // Form Validation and Feedback
+      const form = document.getElementById('contactForm');
       const submitBtn = form.querySelector('button[type="submit"]');
       const messageInput = document.getElementById('message');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const phoneInput = document.getElementById('phone');
+
+      // Validation functions
+      function validateName(name) {
+        return name.trim().length >= 2 && /^[a-zA-Z\s]*$/.test(name);
+      }
+
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function validatePhone(phone) {
+        return /^[6-9]\d{9}$/.test(phone);
+      }
+
+      function validateMessage(message) {
+        return message.trim().length >= 10;
+      }
+
+      function showError(input, message) {
+        const formGroup = input.closest('.form-group');
+        const existingError = formGroup.querySelector('.error-message');
+        if (existingError) {
+          existingError.remove();
+        }
+        
+        const error = document.createElement('div');
+        error.className = 'error-message';
+        error.style.color = '#EF4444';
+        error.style.fontSize = '0.875rem';
+        error.style.marginTop = '0.25rem';
+        error.textContent = message;
+        formGroup.appendChild(error);
+        
+        input.style.borderColor = '#EF4444';
+      }
+
+      function clearError(input) {
+        const formGroup = input.closest('.form-group');
+        const error = formGroup.querySelector('.error-message');
+        if (error) {
+          error.remove();
+        }
+        input.style.borderColor = '#d1d5db';
+      }
+
+      // Add input event listeners for real-time validation
+      nameInput.addEventListener('input', () => {
+        if (nameInput.value.trim() === '') {
+          clearError(nameInput);
+        } else if (!validateName(nameInput.value)) {
+          showError(nameInput, 'Please enter a valid name (letters and spaces only)');
+        } else {
+          clearError(nameInput);
+        }
+      });
+
+      emailInput.addEventListener('input', () => {
+        if (emailInput.value.trim() === '') {
+          clearError(emailInput);
+        } else if (!validateEmail(emailInput.value)) {
+          showError(emailInput, 'Please enter a valid email address');
+        } else {
+          clearError(emailInput);
+        }
+      });
+
+      phoneInput.addEventListener('input', () => {
+        if (phoneInput.value.trim() === '') {
+          clearError(phoneInput);
+        } else if (!validatePhone(phoneInput.value)) {
+          showError(phoneInput, 'Please enter a valid 10-digit Indian mobile number starting with 6-9');
+        } else {
+          clearError(phoneInput);
+        }
+      });
+
+      messageInput.addEventListener('input', () => {
+        if (messageInput.value.trim() === '') {
+          clearError(messageInput);
+        } else if (!validateMessage(messageInput.value)) {
+          showError(messageInput, 'Message must be at least 10 characters long');
+        } else {
+          clearError(messageInput);
+        }
+      });
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Validate form
-        if (!form.checkValidity()) {
+        // Validate all fields
+        let isValid = true;
+        
+        if (!validateName(nameInput.value)) {
+          showError(nameInput, 'Please enter a valid name (letters and spaces only)');
+          isValid = false;
+        }
+        
+        if (!validateEmail(emailInput.value)) {
+          showError(emailInput, 'Please enter a valid email address');
+          isValid = false;
+        }
+        
+        if (!validatePhone(phoneInput.value)) {
+          showError(phoneInput, 'Please enter a valid 10-digit Indian mobile number starting with 6-9');
+          isValid = false;
+        }
+        
+        if (!validateMessage(messageInput.value)) {
+          showError(messageInput, 'Message must be at least 10 characters long');
+          isValid = false;
+        }
+
+        if (!isValid) {
+          // Remove any existing feedback
+          const existingFeedback = form.querySelector('.form-feedback');
+          if (existingFeedback) {
+            existingFeedback.remove();
+          }
+
           const feedback = document.createElement('div');
           feedback.className = 'form-feedback error';
-          feedback.textContent = 'Please fill all required fields correctly.';
+          feedback.textContent = 'Please correct the errors before submitting.';
           form.appendChild(feedback);
           
           // Remove feedback after 5 seconds
@@ -1370,3 +1525,4 @@
   </script>
 </body>
 </html>
+
